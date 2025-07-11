@@ -1,4 +1,3 @@
-# views.py
 from django.shortcuts import render
 movies = [
  {
@@ -32,16 +31,13 @@ def index(request):
     {'template_data': template_data})
 
 
-# Create your views here.
-from django.shortcuts import get_object_or_404
-
 def show(request, id):
-    movie = get_object_or_404(Movie, id=id)  # ✅ Safely gets movie or returns 404
-    template_data = {
-        'title': movie.name,
-        'movie': movie
-    }
-    return render(request, 'movies/show.html', {'template_data': template_data})
+    movie = Movie.objects.get(id=id)
+    template_data = {}
+    template_data['title'] = movie.name
+    template_data['movie'] = movie
+    return render(request, 'movies/show.html',{'template_data': template_data})
+ 
 
     
     
